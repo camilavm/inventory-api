@@ -46,7 +46,7 @@ public class VehicleUseCase implements VehicleUseCasePort {
       }
 
       return VehicleMapper.domainToResponseDto(vehicleByName);
-    } catch (Exception e) {
+    } catch (ChangeSetPersister.NotFoundException e) {
       throw new SwapiNotFoundException(VEHICLE_CONST, name);
     }
   }
@@ -73,7 +73,7 @@ public class VehicleUseCase implements VehicleUseCasePort {
       vehicleByName.setNumberUnits(numberUnits);
 
       this.vehicleRepositoryPort.setNumberVehicleUnitsByName(VehicleMapper.domainToEntity(vehicleByName));
-    } catch (Exception e) {
+    } catch (ChangeSetPersister.NotFoundException e) {
       throw new SwapiNotFoundException(VEHICLE_CONST, name);
     }
   }
@@ -106,7 +106,7 @@ public class VehicleUseCase implements VehicleUseCasePort {
         vehicleByName.setNumberUnits(total);
         this.vehicleRepositoryPort.incrementNumberVehicleUnitsByName(VehicleMapper.domainToEntity(vehicleByName));
       }
-    } catch (Exception e) {
+    } catch (ChangeSetPersister.NotFoundException e) {
       throw new SwapiNotFoundException(VEHICLE_CONST, name);
     }
   }
@@ -143,7 +143,7 @@ public class VehicleUseCase implements VehicleUseCasePort {
         vehicleByName.setNumberUnits(total);
         this.vehicleRepositoryPort.decrementNumberVehicleUnitsByName(VehicleMapper.domainToEntity(vehicleByName));
       }
-    } catch (Exception e) {
+    } catch (ChangeSetPersister.NotFoundException e) {
       throw new SwapiNotFoundException(VEHICLE_CONST, name);
     }
   }

@@ -46,7 +46,7 @@ public class StarshipUseCase implements StarshipUseCasePort {
       }
 
       return StarshipMapper.domainToResponseDto(starshipByName);
-    } catch (Exception e) {
+    } catch (ChangeSetPersister.NotFoundException e) {
       throw new SwapiNotFoundException(STARSHIP_CONST, name);
     }
   }
@@ -73,7 +73,7 @@ public class StarshipUseCase implements StarshipUseCasePort {
       starshipByName.setNumberUnits(numberUnits);
 
       this.starshipRepositoryPort.setNumberStarshipUnitsByName(StarshipMapper.domainToEntity(starshipByName));
-    } catch (Exception e) {
+    } catch (ChangeSetPersister.NotFoundException e) {
       throw new SwapiNotFoundException(STARSHIP_CONST, name);
     }
   }
@@ -106,7 +106,7 @@ public class StarshipUseCase implements StarshipUseCasePort {
         starshipByName.setNumberUnits(total);
         this.starshipRepositoryPort.incrementNumberStarshipUnitsByName(StarshipMapper.domainToEntity(starshipByName));
       }
-    } catch (Exception e) {
+    } catch (ChangeSetPersister.NotFoundException e) {
       throw new SwapiNotFoundException(STARSHIP_CONST, name);
     }
   }
@@ -143,7 +143,7 @@ public class StarshipUseCase implements StarshipUseCasePort {
         starshipByName.setNumberUnits(total);
         this.starshipRepositoryPort.decrementNumberStarshipUnitsByName(StarshipMapper.domainToEntity(starshipByName));
       }
-    } catch (Exception e) {
+    } catch (ChangeSetPersister.NotFoundException e) {
       throw new SwapiNotFoundException(STARSHIP_CONST, name);
     }
   }
